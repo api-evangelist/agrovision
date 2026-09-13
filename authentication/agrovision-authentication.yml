@@ -1,0 +1,51 @@
+generated: '2026-09-13'
+method: probed
+source: https://shop.fruitist.com/.well-known/openid-configuration
+aid: agrovision-ucp-commerce
+summary: >-
+  Agrovision publishes no API keys, no developer credentials and no authentication
+  documentation of its own. Two real authentication facts were observed on its storefront host:
+  the UCP MCP endpoint accepts anonymous tools/list and anonymous catalog/cart calls, and the
+  store exposes Shopify's customer-account OpenID Connect authorization server for shopper
+  identity.
+schemes:
+- id: anonymous-mcp
+  type: none
+  applies_to: https://shop.fruitist.com/api/ucp/mcp
+  evidence:
+    method: POST
+    body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+    http_status: 200
+    fetched: '2026-09-13'
+  note: >-
+    No Authorization header, no API key and no OAuth challenge was required for tools/list.
+    Every tool still requires a `meta.ucp-agent.profile` URI in its arguments — an agent
+    identity declaration, not a credential.
+- id: shopify-customer-account-oidc
+  type: openIdConnect
+  openIdConnectUrl: https://shop.fruitist.com/.well-known/openid-configuration
+  issuer: https://shopify.com/authentication/64996540577
+  authorization_endpoint: https://shopify.com/authentication/64996540577/oauth/authorize
+  token_endpoint: https://shopify.com/authentication/64996540577/oauth/token
+  jwks_uri: https://shopify.com/authentication/64996540577/.well-known/jwks.json
+  end_session_endpoint: https://shopify.com/authentication/64996540577/logout
+  grant_types: []
+  response_types:
+  - code
+  code_challenge_methods:
+  - S256
+  id_token_signing_alg_values:
+  - RS256
+  token_endpoint_auth_methods:
+  - client_secret_basic
+  - client_secret_post
+  applies_to: shopper sign-in at https://shop.fruitist.com/account
+  note: >-
+    Operated by Shopify on behalf of this store, not by Agrovision. The issuer is a Shopify
+    tenant URL. Recorded because it is the only identity surface reachable on a company host.
+absent:
+- api_keys: >-
+    No developer API key programme, no key prefix, no key issuance page anywhere on
+    fruitist.com or agrovisioncorp.com.
+- mutual_tls: not offered
+- signed_requests: not documented

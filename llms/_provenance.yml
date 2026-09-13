@@ -1,0 +1,19 @@
+generated: '2026-09-13'
+method: searched
+source: https://shop.fruitist.com/llms.txt
+files:
+- file: llms/agrovision-llms.txt
+  url: https://shop.fruitist.com/llms.txt
+  status: 200
+  content_type: text/plain
+  verbatim: true
+- file: llms/agrovision-agents.md
+  url: https://shop.fruitist.com/agents.md
+  status: 200
+  content_type: text/markdown; charset=utf-8
+  verbatim: true
+note: >-
+  Both documents are served by Shopify on Agrovision's own storefront host and describe THIS
+  store — its UCP discovery path, its MCP endpoint, its read-only browsing paths and its
+  policies. They are platform-generated, not hand-authored by the company. The corporate site
+  www.fruitist.com returns 404 on /llms.txt.

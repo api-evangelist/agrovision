@@ -1,0 +1,118 @@
+generated: '2026-09-13'
+method: probed
+source: >-
+  https://shop.fruitist.com/api/ucp/mcp (tools/list, 200, 2026-09-13),
+  https://shop.fruitist.com/llms.txt, https://shop.fruitist.com/.well-known/ucp
+aid: agrovision-ucp-commerce
+scope_note: >-
+  These conventions describe the ONLY machine-callable surface Agrovision operates — the UCP
+  commerce MCP endpoint on its Shopify storefront. The company publishes no REST API, so there
+  is no first-party HTTP convention set to record.
+auth_style:
+  style: none-for-browse, oidc-for-shopper-identity
+  detail: >-
+    tools/list and catalog/cart tools answer anonymously. Shopper-bound operations use Shopify
+    customer-account OIDC. See authentication/agrovision-authentication.yml.
+transport:
+  protocol: MCP (JSON-RPC 2.0 over HTTP POST)
+  content_type: application/json
+  accept: application/json, text/event-stream
+  endpoint: https://shop.fruitist.com/api/ucp/mcp
+agent_identity:
+  required: true
+  field: meta.ucp-agent.profile
+  detail: >-
+    Every one of the 13 tool inputSchemas marks `meta` required, and `meta.ucp-agent.profile`
+    (a URI) required within it. An agent must declare a UCP agent profile URI on every call.
+  evidence: mcp/agrovision-ucp-mcp-tools.json
+idempotency:
+  coverage: none
+  mechanism: null
+  header: null
+  scope: []
+  detail: >-
+    No Idempotency-Key header, no client-supplied request key and no replay-protection language
+    appears in the tool schemas, in /llms.txt, or in the UCP merchant profile. Replay safety is
+    instead structural: create_cart and create_checkout return server-assigned GIDs, and the
+    mutating tools (update_cart, update_checkout, complete_checkout, cancel_*) address an
+    existing id, so a repeated update converges rather than duplicating. That is convergent
+    mutation, not idempotency, and is recorded as `none` rather than credited as `partial`.
+reversibility:
+  grade: documented
+  detail: >-
+    Both write lifecycles have an explicit reversal tool, but no published window.
+  surfaces:
+  - write: create_cart
+    reversal: cancel_cart
+    window: null
+    window_source: null
+  - write: create_checkout
+    reversal: cancel_checkout
+    window: null
+    window_source: null
+  - write: complete_checkout
+    reversal: null
+    window: null
+    note: >-
+      Once a checkout is completed an order exists; no order-cancellation or refund tool is
+      exposed on this endpoint (get_order is read-only). Reversal after purchase runs through
+      the store's published refund policy at
+      https://shop.fruitist.com/policies/refund-policy, not through the agent surface.
+  note: >-
+    No window is asserted here because none is stated. The refund policy page is the only
+    published reversal terms document and it is human prose, not part of the contract.
+dry_run_mode:
+  supported: false
+  detail: No sandbox, test mode, test store or simulated-checkout mode is published.
+pagination:
+  style: unknown
+  detail: >-
+    search_catalog accepts catalog query arguments; the UCP catalog_search schema at
+    https://ucp.dev/2026-08-25/schemas/shopping/catalog_search.json defines the paging contract.
+    Not re-stated here because it is the protocol's, not the provider's.
+versioning:
+  style: dated protocol version
+  current: '2026-08-25'
+  supported:
+  - '2026-08-25'
+  - '2026-04-08'
+  - '2026-01-23'
+  source: https://shop.fruitist.com/.well-known/ucp
+  detail: >-
+    Versioning is inherited from UCP; older versions remain reachable at
+    https://fruitist.myshopify.com/.well-known/ucp/<version>.
+money:
+  representation: integer minor units + ISO 4217 currency code
+  example: '{"amount": 600, "currency": "USD"} is $6.00'
+  source: tool descriptions in mcp/agrovision-ucp-mcp-tools.json
+  detail: >-
+    Zero-decimal currencies (JPY) are already whole units. An agent must convert before quoting
+    a price to a buyer.
+buyer_context:
+  fields:
+  - context.address_country
+  - context.currency
+  detail: Required for accurate pricing and availability, per /llms.txt.
+human_approval:
+  required_for:
+  - complete_checkout
+  detail: >-
+    /llms.txt states checkout requires contemporaneous buyer approval and that agents must not
+    complete payment without explicit buyer consent.
+  source: https://shop.fruitist.com/llms.txt
+error_envelope:
+  style: JSON-RPC 2.0 error object
+  detail: >-
+    Transport-level errors follow JSON-RPC 2.0. Business errors are returned inside the
+    complete_checkout result ("or any errors encountered"). No provider-published error code
+    registry exists, so no errors/ artifact was written rather than inventing one.
+rate_limit_signaling:
+  documented: true
+  detail: See rate-limits/agrovision-rate-limits.yml — per-IP limiting with 429 back-off,
+    stated in prose with no numbers and no headers named.
+cross_links:
+  authentication: authentication/agrovision-authentication.yml
+  scopes: scopes/agrovision-scopes.yml
+  rate_limits: rate-limits/agrovision-rate-limits.yml
+  mcp: mcp/agrovision-mcp.yml
+  conformance: conformance/agrovision-conformance.yml

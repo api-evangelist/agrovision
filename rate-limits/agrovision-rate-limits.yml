@@ -1,0 +1,31 @@
+generated: '2026-09-13'
+method: searched
+source: https://shop.fruitist.com/llms.txt
+aid: agrovision-ucp-commerce
+limit_count: 0
+summary: >-
+  Rate limiting is acknowledged in prose but no number, window, quota or response header is
+  published. An agent is told only to back off on 429.
+limits:
+- scope: per-ip
+  applies_to: https://shop.fruitist.com/api/ucp/mcp
+  window: null
+  limit: null
+  burst: null
+  status_on_exhaustion: 429
+  headers: []
+  quote: >-
+    "Respect rate limits. The MCP endpoint is rate-limited per IP. Back off on 429 responses."
+  source: https://shop.fruitist.com/llms.txt
+observed:
+- url: https://shop.fruitist.com/api/ucp/mcp
+  method: POST
+  http_status: 200
+  rate_limit_headers_returned: []
+  fetched: '2026-09-13'
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header was present on the successful
+    unauthenticated tools/list response.
+note: >-
+  limit_count is 0 deliberately: a documented 429 with no stated ceiling is an honest zero, not
+  a published limit. Agrovision publishes no rate limits of its own anywhere else.

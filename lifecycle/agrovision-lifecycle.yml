@@ -1,0 +1,53 @@
+generated: '2026-09-13'
+method: searched
+source: >-
+  https://shop.fruitist.com/.well-known/ucp, https://shop.fruitist.com/llms.txt,
+  https://www.fruitist.com/news, and probes for a status page and deprecation policy.
+aid: agrovision-ucp-commerce
+versioning:
+  scheme: dated protocol version (inherited from UCP)
+  current: '2026-08-25'
+  supported:
+  - version: '2026-08-25'
+    status: current
+    url: https://shop.fruitist.com/.well-known/ucp
+  - version: '2026-04-08'
+    status: supported
+    url: https://fruitist.myshopify.com/.well-known/ucp/2026-04-08
+  - version: '2026-01-23'
+    status: supported
+    url: https://fruitist.myshopify.com/.well-known/ucp/2026-01-23
+  detail: >-
+    Two prior protocol versions remain individually addressable, which is a real backwards
+    compatibility posture — but it is the platform's, published by Shopify in this store's
+    merchant profile, not a versioning policy Agrovision authored.
+deprecation_policy:
+  published: false
+  sunset_header: not observed
+  deprecation_header: not observed
+  detail: >-
+    No deprecation policy, no RFC 8594 Sunset/Deprecation headers on the MCP endpoint response,
+    and no notice period stated anywhere. No Deprecation pointer emitted.
+status_page:
+  published: false
+  probed:
+  - url: https://status.fruitist.com/
+    status: 0
+    note: host does not resolve
+  detail: >-
+    Agrovision publishes no status page. Shopify runs https://www.shopifystatus.com/ for the
+    underlying platform, but that is Shopify's page for Shopify's estate and is not a status
+    page this company publishes, so no StatusPage pointer was emitted.
+sla:
+  published: false
+  detail: No uptime or availability commitment is published for the commerce surface.
+changelog:
+  published: false
+  nearest_surface: https://www.fruitist.com/news
+  detail: >-
+    The news page is a dated corporate press-release stream (funding, retail launches,
+    executive hires, awards) — real and current, but it is company news, not a product or API
+    changelog. It is wired as Blog, not ChangeLog, for that reason.
+support:
+  channel: https://www.fruitist.com/contact
+  detail: Corporate contact form. No developer support channel, forum or community exists.

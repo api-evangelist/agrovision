@@ -1,0 +1,37 @@
+generated: '2026-09-13'
+method: generated
+source: >-
+  Grounded in the live MCP tools/list response at https://shop.fruitist.com/api/ucp/mcp
+  (HTTP 200, 2026-09-13), saved verbatim at mcp/agrovision-ucp-mcp-tools.json, plus the store's
+  own agent instructions at https://shop.fruitist.com/llms.txt and the UCP merchant profile at
+  https://shop.fruitist.com/.well-known/ucp.
+provider_published_skills:
+  found: false
+  detail: >-
+    Agrovision publishes no skills/ directory and no AGENTS.md. Its storefront llms.txt
+    recommends https://shop.app/SKILL.md — that is Shopify's cross-store Shop skill, a
+    third-party artifact, and is deliberately not saved here as a provider skill.
+skill_count: 1
+skills:
+- name: agrovision-buy-berries
+  file: skills/agrovision-buy-berries.md
+  api: agrovision-ucp-commerce
+  summary: >-
+    Search the store, build a cart, construct a checkout, and stop at buyer approval — with the
+    reversal paths and the minor-units money rule called out.
+  operations:
+  - search_catalog
+  - lookup_catalog
+  - get_product
+  - create_cart
+  - get_cart
+  - update_cart
+  - cancel_cart
+  - create_checkout
+  - get_checkout
+  - update_checkout
+  - complete_checkout
+  - cancel_checkout
+  - get_order
+  operations_verified: >-
+    All 13 tool names appear verbatim in mcp/agrovision-ucp-mcp-tools.json; none was invented.

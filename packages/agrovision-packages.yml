@@ -1,0 +1,20 @@
+generated: '2026-09-13'
+method: searched
+source: >-
+  npm (registry.npmjs.org), PyPI, RubyGems, crates.io, Maven Central, NuGet, pkg.go.dev and
+  Packagist searched for "fruitist" and "agrovision"; https://www.fruitist.com and
+  https://shop.fruitist.com read for SDK/CLI/source links.
+package_count: 0
+official_count: 0
+packages: []
+detail: >-
+  Agrovision/Fruitist publishes no client libraries, no CLI and no first-party source
+  repositories. No GitHub organisation for the company could be found — the "AgroVision" repos
+  that surface in search are unrelated academic and hobby projects (crop-disease ML classifiers)
+  with no connection to this company. The only client tooling that reaches its commerce surface
+  is Shopify's own, distributed by Shopify and not by Agrovision:
+  https://shop.app/SKILL.md (the Shop agent skill, referenced from this store's llms.txt).
+  That is a third-party artifact and is deliberately not listed as a package of this provider.
+note: >-
+  package_count 0 is a checked zero, not an unchecked field. No SDKs pointer was emitted in
+  apis.yml because emitting one would credit the company with client libraries it does not ship.

@@ -1,0 +1,33 @@
+generated: '2026-09-13'
+method: searched
+source: https://www.fruitist.com/ and https://shop.fruitist.com/collections/all
+aid: agrovision
+plan_count: 0
+summary: >-
+  Agrovision publishes no API plans, no developer tiers and no usage-based pricing, because it
+  sells no API. The only prices it publishes are retail prices for physical fruit in its
+  direct-to-consumer Shopify store, and the UCP MCP endpoint that reads them is free and
+  unauthenticated to call.
+plans: []
+pricing_surfaces:
+- kind: retail-product-catalog
+  url: https://shop.fruitist.com/collections/all
+  status: 200
+  machine_readable: true
+  endpoints:
+  - https://shop.fruitist.com/products.json
+  - https://shop.fruitist.com/collections/{handle}/products.json
+  note: >-
+    Shopify storefront product JSON, verified 200 on 2026-09-13. Physical-goods prices, not API
+    pricing.
+- kind: wholesale-and-retail-distribution
+  url: https://www.fruitist.com/locate
+  note: Where-to-buy locator; no prices published.
+api_pricing:
+  published: false
+  metering: none
+  free_tier: >-
+    The commerce MCP endpoint answers anonymously at no cost; there is no key, quota or bill.
+note: >-
+  plan_count 0 with a stated reason, per the pipeline rule that an honest zero is data. This is
+  not a "contact sales" gate — there is no API product to buy.

@@ -1,0 +1,107 @@
+generated: '2026-09-13'
+method: probed
+source: direct HTTPS probes of the named /.well-known/ path list on every host this record knows
+note: >-
+  Five hosts probed on 2026-09-13: the corporate Webflow sites (fruitist.com, www.fruitist.com,
+  agrovisioncorp.com, www.agrovisioncorp.com) serve nothing at any /.well-known/ path. The Shopify
+  storefront host shop.fruitist.com serves three real documents — OpenID Connect discovery, the
+  identical OAuth authorization-server metadata, and a Universal Commerce Protocol merchant
+  profile. The OIDC/OAuth issuer is https://shopify.com/authentication/64996540577, i.e. the
+  documents describe Shopify's customer-account authorization server, not an authorization server
+  Agrovision operates; the UCP profile describes this store specifically. Recorded with that
+  provenance rather than as first-party identity infrastructure.
+hosts:
+- host: fruitist.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: www.fruitist.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: shop.fruitist.com
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: well-known/agrovision-openid-configuration.json
+    content_type: application/json; charset=utf-8
+    note: >-
+      Shopify customer-account OIDC discovery. issuer https://shopify.com/authentication/64996540577.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: well-known/agrovision-oauth-authorization-server.json
+    content_type: application/json; charset=utf-8
+    note: Byte-identical to the OIDC discovery document.
+  - path: /.well-known/ucp
+    status: 200
+    file: well-known/agrovision-ucp.json
+    content_type: application/json; charset=utf-8
+    note: >-
+      Universal Commerce Protocol 2026-08-25 merchant profile for this store; names the MCP
+      endpoint, the shopping capabilities and the supported payment handlers.
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: agrovisioncorp.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: www.agrovisioncorp.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404

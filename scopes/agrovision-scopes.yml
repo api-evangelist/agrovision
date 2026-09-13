@@ -1,0 +1,36 @@
+generated: '2026-09-13'
+method: probed
+source: https://shop.fruitist.com/.well-known/openid-configuration
+aid: agrovision-ucp-commerce
+provider_of_record: >-
+  Shopify customer-account authorization server for this store's tenant
+  (issuer https://shopify.com/authentication/64996540577). Agrovision does not define or
+  document scopes of its own; these are read verbatim from scopes_supported in the discovery
+  document served on its storefront host.
+scope_count: 4
+scopes:
+- name: openid
+  description: Standard OpenID Connect scope requesting an ID token for the signed-in shopper.
+- name: email
+  description: Releases the shopper's email address and email_verified claim.
+- name: customer-account-api:full
+  description: >-
+    Full access to the Shopify Customer Account API for the authenticated shopper — orders,
+    addresses, payment methods and profile on this store.
+- name: customer-account-mcp-api:full
+  description: >-
+    Full access to the customer-account MCP API for the authenticated shopper, i.e. the
+    authenticated counterpart of the anonymous UCP commerce MCP endpoint.
+claims_supported:
+- iss
+- sub
+- aud
+- exp
+- iat
+- nonce
+- sid
+- email
+- email_verified
+note: >-
+  The anonymous UCP MCP endpoint at /api/ucp/mcp requires none of these scopes for catalog,
+  cart or checkout construction; they gate shopper-identity-bound operations only.

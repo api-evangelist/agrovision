@@ -1,0 +1,104 @@
+generated: '2026-09-13'
+method: probed
+source: https://shop.fruitist.com/api/ucp/mcp
+name: Fruitist Store UCP Commerce MCP
+aid: agrovision-ucp-commerce
+status: live
+authorship: platform
+authorship_note: >-
+  The MCP service is Shopify's Universal Commerce Protocol implementation, served from a host
+  Agrovision/Fruitist controls (shop.fruitist.com, canonically fruitist.myshopify.com) and bound
+  to Agrovision's own catalog, carts and orders. Agrovision did not author the protocol or the
+  tool schemas; it operates the store the tools act on. Recorded here because an agent can call
+  it today against this company's products — not because the company published a contract.
+deployment:
+  mode: remote
+  endpoint: https://shop.fruitist.com/api/ucp/mcp
+  auth: none
+  verified: probed
+  note: >-
+    tools/list answered 200 anonymously on 2026-09-13. /.well-known/ucp names the canonical
+    endpoint as https://fruitist.myshopify.com/api/ucp/mcp; the shop.fruitist.com vanity host
+    answers the same service. No local-stdio package exists.
+discovery:
+- path: /llms.txt
+  url: https://shop.fruitist.com/llms.txt
+  status: 200
+- path: /agents.md
+  url: https://shop.fruitist.com/agents.md
+  status: 200
+- path: /.well-known/ucp
+  url: https://shop.fruitist.com/.well-known/ucp
+  status: 200
+protocol:
+  name: Universal Commerce Protocol
+  spec: https://ucp.dev/2026-08-25/specification/overview/
+  version: '2026-08-25'
+  supported_versions:
+  - '2026-08-25'
+  - '2026-04-08'
+  - '2026-01-23'
+  transport: mcp
+x-evidence:
+  fetched: '2026-09-13'
+  url: https://shop.fruitist.com/api/ucp/mcp
+  method: POST
+  body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  http_status: 200
+  content_type: application/json; charset=utf-8
+  raw: mcp/agrovision-ucp-mcp-tools.json
+tool_count: 13
+tools:
+- name: search_catalog
+  category: catalog
+  description: Search for products from the online store, hosted on Shopify.
+- name: lookup_catalog
+  category: catalog
+  description: Look up multiple products or variants by identifier.
+- name: get_product
+  category: catalog
+  description: Retrieve complete product detail by identifier. Returns a singular product.
+- name: create_cart
+  category: cart
+  description: Creates a new cart.
+- name: get_cart
+  category: cart
+  description: Get the cart contents.
+- name: update_cart
+  category: cart
+  description: Perform updates to a cart.
+- name: cancel_cart
+  category: cart
+  description: Cancels a cart.
+- name: create_checkout
+  category: checkout
+  description: Creates a checkout and returns line items, totals, discounts and taxes.
+- name: get_checkout
+  category: checkout
+  description: Returns details about the checkout, including line items, totals, discounts and taxes.
+- name: update_checkout
+  category: checkout
+  description: Updates a checkout (shipping address, delivery method, buyer details).
+- name: complete_checkout
+  category: checkout
+  description: Completes a checkout; returns order ID, Thank You Page URL or errors.
+- name: cancel_checkout
+  category: checkout
+  description: Cancels a checkout.
+- name: get_order
+  category: order
+  description: Get the details of an order.
+capabilities:
+- dev.ucp.shopping.catalog.search
+- dev.ucp.shopping.catalog.lookup
+- dev.ucp.shopping.cart
+- dev.ucp.shopping.checkout
+- dev.ucp.shopping.order
+- dev.ucp.shopping.discount
+- dev.ucp.shopping.fulfillment
+- dev.shopify.catalog
+notes:
+- Every tool inputSchema requires a `meta.ucp-agent.profile` URI — UCP agent profile discovery
+  is mandatory on every call.
+- Prices are integers in ISO 4217 minor units paired with a currency code.
+- complete_checkout requires contemporaneous buyer approval; agents must not pay unattended.

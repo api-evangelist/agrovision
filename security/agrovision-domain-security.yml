@@ -1,0 +1,23 @@
+generated: '2026-09-13'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.fruitist.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov  5 23:55:45 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: shop.fruitist.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov 14 22:18:01 2026 GMT
+  hsts: true
+  hsts_max_age: 7889238
+domains:
+- domain: fruitist.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
