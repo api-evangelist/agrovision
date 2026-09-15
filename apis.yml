@@ -1,17 +1,15 @@
 aid: agrovision
 name: Agrovision
-description: >-
-  Agrovision — rebranded to Fruitist in April 2025 — is a vertically integrated premium
-  superfruit company founded in 2012 and headquartered in Century City, California, with a
-  second office in San Isidro, Peru. It farms, packs, ships and markets jumbo blueberries,
-  raspberries, blackberries and cherries across ten microclimates in Peru, Mexico, Morocco,
-  Chile, Oregon, Egypt and China, selling into 12,500+ retail doors in 28 countries through
-  Costco, Walmart, Whole Foods, Trader Joe's, Sprouts and Wakefern. It is a grower and
-  consumer-brand business, not a software vendor: it publishes no developer program, no API
-  reference and no machine-readable API contract of its own. The one agent-callable surface it
-  operates is its Shopify direct-to-consumer store at shop.fruitist.com, which serves a live
-  Universal Commerce Protocol (UCP) MCP endpoint, an llms.txt/agents.md pair and Shopify
-  customer-account OpenID Connect discovery documents on the company's own host.
+description: 'Agrovision — rebranded to Fruitist in April 2025 — is a vertically integrated premium superfruit
+  company founded in 2012 and headquartered in Century City, California, with a second office in San Isidro,
+  Peru. It farms, packs, ships and markets jumbo blueberries, raspberries, blackberries and cherries across
+  ten microclimates in Peru, Mexico, Morocco, Chile, Oregon, Egypt and China, selling into 12,500+ retail
+  doors in 28 countries through Costco, Walmart, Whole Foods, Trader Joe''s, Sprouts and Wakefern. It
+  is a grower and consumer-brand business, not a software vendor: it publishes no developer program, no
+  API reference and no machine-readable API contract of its own. The one agent-callable surface it operates
+  is its Shopify direct-to-consumer store at shop.fruitist.com, which serves a live Universal Commerce
+  Protocol (UCP) MCP endpoint, an llms.txt/agents.md pair and Shopify customer-account OpenID Connect
+  discovery documents on the company''s own host.'
 image: https://cdn.prod.website-files.com/67eb354a3bfe8fdee496f42f/67ec64d28ebae3f8761dd62f_e6fc4a7ca608233e7083f589ede8cac1_og.jpeg
 url: https://raw.githubusercontent.com/api-evangelist/agrovision/refs/heads/main/apis.yml
 x-type: company
@@ -26,26 +24,42 @@ tags:
 - Food and Beverage
 - Consumer Packaged Goods
 - Agriculture Technology
+- E-Commerce
+- Retail
+- Supply Chain
+- Agentic Commerce
+- Universal Commerce Protocol
+tags_raw:
+- Company
+- Agriculture
+- Food and Beverage
+- Consumer Packaged Goods
+- Agriculture Technology
 - Ecommerce
 - Retail
 - Supply Chain
 - Agentic Commerce
 - Universal Commerce Protocol
 apis:
-- aid: agrovision-ucp-commerce
+- aid: agrovision:agrovision-ucp-commerce
   name: Fruitist Store UCP Commerce MCP
-  description: >-
-    The agent-facing commerce surface of the Fruitist (Agrovision) direct-to-consumer store.
-    It is a Universal Commerce Protocol 2026-08-25 service exposed over MCP at
-    https://shop.fruitist.com/api/ucp/mcp and returns 13 tools covering catalog search and
-    lookup, cart lifecycle, and checkout lifecycle including cancellation. The protocol
-    implementation is Shopify's platform UCP service; the host, the catalog and the orders are
-    Agrovision's. tools/list answers anonymously; completing a checkout requires contemporaneous
+  description: The agent-facing commerce surface of the Fruitist (Agrovision) direct-to-consumer store.
+    It is a Universal Commerce Protocol 2026-08-25 service exposed over MCP at https://shop.fruitist.com/api/ucp/mcp
+    and returns 13 tools covering catalog search and lookup, cart lifecycle, and checkout lifecycle including
+    cancellation. The protocol implementation is Shopify's platform UCP service; the host, the catalog
+    and the orders are Agrovision's. tools/list answers anonymously; completing a checkout requires contemporaneous
     buyer approval.
   humanURL: https://shop.fruitist.com/
   image: https://cdn.prod.website-files.com/67eb354a3bfe8fdee496f42f/67ec64d28ebae3f8761dd62f_e6fc4a7ca608233e7083f589ede8cac1_og.jpeg
   baseURL: https://shop.fruitist.com/api/ucp/mcp
   tags:
+  - E-Commerce
+  - Agentic Commerce
+  - Universal Commerce Protocol
+  - MCP
+  - Catalog
+  - Checkout
+  tags_raw:
   - Ecommerce
   - Agentic Commerce
   - Universal Commerce Protocol
@@ -123,16 +137,14 @@ x-company-links:
   locations: https://www.fruitist.com/locations
   where_to_buy: https://www.fruitist.com/locate
   legacy_brand_site: https://www.agrovisioncorp.com/
-  note: >-
-    Real, live corporate pages that carry no canonical APIs.json property type. Recorded here
-    rather than mistyped into common[] as Documentation or a near-synonym.
+  note: Real, live corporate pages that carry no canonical APIs.json property type. Recorded here rather
+    than mistyped into common[] as Documentation or a near-synonym.
 x-secondary-market:
   venue: Hiive
   url: https://www.hiive.com/securities/agrovision-stock
   status: 200
-  note: >-
-    The listing that surfaced this company into the harvest backlog. It is a marketplace page
-    about the company's shares, not a company-published surface, so it is not a Website pointer.
+  note: The listing that surfaced this company into the harvest backlog. It is a marketplace page about
+    the company's shares, not a company-published surface, so it is not a Website pointer.
 x-enrichment:
   date: '2026-09-13'
   status: enriched
