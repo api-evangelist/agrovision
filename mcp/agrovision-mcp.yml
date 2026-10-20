@@ -5,21 +5,19 @@ name: Fruitist Store UCP Commerce MCP
 aid: agrovision-ucp-commerce
 status: live
 authorship: platform
-authorship_note: >-
-  The MCP service is Shopify's Universal Commerce Protocol implementation, served from a host
-  Agrovision/Fruitist controls (shop.fruitist.com, canonically fruitist.myshopify.com) and bound
-  to Agrovision's own catalog, carts and orders. Agrovision did not author the protocol or the
-  tool schemas; it operates the store the tools act on. Recorded here because an agent can call
-  it today against this company's products — not because the company published a contract.
+authorship_note: The MCP service is Shopify's Universal Commerce Protocol implementation, served from
+  a host Agrovision/Fruitist controls (shop.fruitist.com, canonically fruitist.myshopify.com) and bound
+  to Agrovision's own catalog, carts and orders. Agrovision did not author the protocol or the tool schemas;
+  it operates the store the tools act on. Recorded here because an agent can call it today against this
+  company's products — not because the company published a contract.
 deployment:
   mode: remote
   endpoint: https://shop.fruitist.com/api/ucp/mcp
   auth: none
   verified: probed
-  note: >-
-    tools/list answered 200 anonymously on 2026-09-13. /.well-known/ucp names the canonical
-    endpoint as https://fruitist.myshopify.com/api/ucp/mcp; the shop.fruitist.com vanity host
-    answers the same service. No local-stdio package exists.
+  note: tools/list answered 200 anonymously on 2026-09-13. /.well-known/ucp names the canonical endpoint
+    as https://fruitist.myshopify.com/api/ucp/mcp; the shop.fruitist.com vanity host answers the same
+    service. No local-stdio package exists.
 discovery:
 - path: /llms.txt
   url: https://shop.fruitist.com/llms.txt
@@ -98,7 +96,48 @@ capabilities:
 - dev.ucp.shopping.fulfillment
 - dev.shopify.catalog
 notes:
-- Every tool inputSchema requires a `meta.ucp-agent.profile` URI — UCP agent profile discovery
-  is mandatory on every call.
+- Every tool inputSchema requires a `meta.ucp-agent.profile` URI — UCP agent profile discovery is mandatory
+  on every call.
 - Prices are integers in ISO 4217 minor units paired with a currency code.
 - complete_checkout requires contemporaneous buyer approval; agents must not pay unattended.
+tool_quality:
+  tool_count: 13
+  tokens_total: 49354
+  tokens_per_tool_median: 2906
+  heavy_tools:
+  - name: complete_checkout
+    tokens: 7009
+  - name: create_checkout
+    tokens: 5572
+  - name: update_checkout
+    tokens: 5528
+  - name: get_checkout
+    tokens: 5285
+  - name: update_cart
+    tokens: 3784
+  heavy_tool_count: 13
+  params_total: 29
+  params_undescribed: 0
+  params_described_pct: 100.0
+  tools_with_undescribed_params: 0
+  tools_annotated: 0
+  annotated_pct: 0.0
+  state_changing_unhinted:
+  - create_checkout
+  - update_checkout
+  - cancel_checkout
+  - create_cart
+  - update_cart
+  - cancel_cart
+  tools_missing_schema: 0
+  short_descriptions: 0
+  duplicate_descriptions: 0
+  duplicate_names: 0
+  nonportable_names: []
+  output_schema_count: 13
+  token_estimate: chars/3.6 of each compact tool definition
+  source: mcp/agrovision-ucp-mcp-tools.json
+  measured: '2026-10-20'
+  scored: false
+  note: Facts from the saved tools/list capture (mcp_tool_quality.py); recorded, not scored. Checks learned
+    from Glimind's agent-readiness audit.
